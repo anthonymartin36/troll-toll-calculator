@@ -27,13 +27,11 @@ router.get('/:id', async (req, res) => {
   const bridge = await dbBridge.getBridgeByIdDb(Number(req.params.id))
 
   let estimate = 0
-
+  
+  bridge ? console.log("bridge received"): null
   if (bridge.lanes) {
     const origin = convertStringToLatLong(bridge.origin as string)
     const destination = convertStringToLatLong(bridge.destination as string)
-
-    console.log(origin)
-    console.log(destination)
 
     const bodyData = {
       origin: {
@@ -63,6 +61,9 @@ router.get('/:id', async (req, res) => {
       languageCode: 'en-US',
       units: 'IMPERIAL',
     }
+
+    console.log("Maps origin: ", origin)
+    console.log("Maps destination", destination)
 
     const response = await request
       .post('https://routes.googleapis.com/directions/v2:computeRoutes')
