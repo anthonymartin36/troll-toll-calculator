@@ -5,11 +5,11 @@ import { useAuth0 } from '@auth0/auth0-react'
 export function SignIn() {
   const { loginWithRedirect } = useAuth0()
 
-  function OnSignIn(event: FormEvent<HTMLButtonElement>) {
+  function OnSignIn(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
     loginWithRedirect()
-
-    console.log('Log in')
+  
+    //console.log('Log in')
   }
 
   return (

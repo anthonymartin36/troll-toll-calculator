@@ -1,6 +1,7 @@
 import { getBridgesApi } from '../api/bridge.ts'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import Favourite from './Favourite' 
 
 export default function BridgesList() {
   const {
@@ -35,9 +36,7 @@ export default function BridgesList() {
                   <button className="linkButton">
                     <Link to={`/bridge/${bridge.id}`}>{bridge.name}</Link>
                   </button>
-                  <button className="favourites">
-                    <img src="../public/img/favourite.png" alt="favourite" />
-                  </button>
+                  <Favourite />
                 </div>
               </li>
             )

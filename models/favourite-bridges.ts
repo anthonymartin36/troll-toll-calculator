@@ -3,3 +3,12 @@ export interface FavouriteBridge {
   userId: number
   bridgeId: number
 }
+
+export interface NewFavouriteBridge {
+  userId: number
+  bridgeId: number
+}
+
+export interface RemoveFavouriteBridge {
+  id: number
+}
