@@ -1,5 +1,5 @@
-export async function up(knex) {
-  await knex.schema.createTable('users', (table) => {
+export async function up(knex) { //withSchema('public')
+  await knex.schema.withSchema('public').createTable('users', (table) => {
     table.increments('id').primary()
     table.integer('active_bridge_id').nullable()
     table.string('email')
