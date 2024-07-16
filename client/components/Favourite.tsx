@@ -6,7 +6,7 @@ import {useAuth0 } from '@auth0/auth0-react'
 
 
 export default function Favourite() { //prop: bridgeId
-    const [img, setImg] = useState('/img/favourite.png')
+    const [img, setImg] = useState('/img/notfavourite.png')
     const toggleInfoWindow = () => {
         if(img === '/img/notfavourite.png'){
             setImg('/img/favourite.png')
