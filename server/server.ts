@@ -20,7 +20,12 @@ server.use('/api/v1/auth', authRoutes)
 //server.use('/api/v1/maps', mapRoutes)
 
 server.get('*', (req, res) => {
-  res.sendFile(Path.join(__dirname, 'public/index.html'))
+  res.sendFile(Path.join(__dirname, '../index.html'))
 })
+
+if (process.env.NODE_ENV === 'production') {
+  server.use(express.static(Path.resolve('public')))
+
+}
 
 export default server

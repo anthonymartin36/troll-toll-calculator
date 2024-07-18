@@ -34,12 +34,12 @@ export default function SingleBridge() {
   }
 
   async function EstimateTollChange() {
-    console.log('making req')
+    //console.log('making req')
 
     request
       .get(`/api/v1/maps/${id}`)
       .then((result) => {
-        console.log(result)
+        //console.log(result)
 
         setEstimate(result.body.estimate)
       })
@@ -56,7 +56,10 @@ export default function SingleBridge() {
 
       <div className="single-bridge-container">
         <div className="single-bridge-left-div">
-          <img src={`/bridgesimg/${bridge.imageUrl}`} alt={bridge.name}></img>
+          <img 
+          src={`../client/image/bridgesimg/${bridge.imageUrl}`} 
+          alt={bridge.name}
+          />
         </div>
         <div className="right-bridge-right-div">
           <p>

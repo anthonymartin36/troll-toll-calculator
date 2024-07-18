@@ -29,7 +29,7 @@ export default function BridgesList() {
                   <div>
                     <img
                       className="bridgeimages"
-                      src={`/bridgesimg/${bridge.imageUrl}`}
+                      src={`./client/image/bridgesimg/${bridge.imageUrl}`}
                       alt="bridge"
                     />
                   </div>

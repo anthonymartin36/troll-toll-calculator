@@ -11,10 +11,10 @@ const router = createBrowserRouter(routes)
 const root = createRoot(document.getElementById('app') as HTMLElement)
 root.render(
   <Auth0Provider
-    domain="dev-nk18xa4gfp361w7b.au.auth0.com"
-    clientId="mj53PtVJE70bCrMkheOExz8hYlEu5ob6"
+    domain={import.meta.env.VITE_APP_DOMAIN}
+    clientId={import.meta.env.VITE_APP_CLIENT_ID}
     redirectUri={window.location.origin}
-    audience="https://troll-toll/api"
+    audience={import.meta.env.VITE_APP_AUDIENCE}
   >
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

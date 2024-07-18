@@ -3,13 +3,13 @@ import { Request } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { JwtPayload } from 'jsonwebtoken'
 import jwks from 'jwks-rsa'
-import * as dotenv from 'dotenv'
+// import * as dotenv from 'dotenv'
 
-dotenv.config() 
+// dotenv.config() 
 
 // TODO: set the domain and audience (API Identifier)
-const domain = process.env.DOMAIN 
-const audience = process.env.AUDIENCE 
+const domain = process.env.VITE_APP_DOMAIN 
+const audience = process.env.VITE_APP_AUDIENCE 
 
 const checkJwt = jwt({
   secret: jwks.expressJwtSecret({
@@ -18,7 +18,7 @@ const checkJwt = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: `${domain}/.well-known/jwks.json`,
   }) as GetVerificationKey,
-  audience: audience,
+  audience: `${audience}`,
   issuer: `${domain}/`,
   algorithms: ['RS256'],
 })

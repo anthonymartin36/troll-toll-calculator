@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import {useAuth0 } from '@auth0/auth0-react'
+import fav from '../image/img/favourite.png'
+import notFav from '../image/img/notfavourite.png'
 
 
 export default function Favourite() { //prop: bridgeId
-    const [img, setImg] = useState('/img/notfavourite.png')
+    const [img, setImg] = useState(notFav)
     const toggleInfoWindow = () => {
-        if(img === '/img/notfavourite.png'){
-            setImg('/img/favourite.png')
+        if(img === notFav){
+            setImg(fav)
         } else
-        setImg('/img/notfavourite.png')
+        setImg(notFav)
     }
 
     // to fo that call the current api (getallfavBridiges) - and compare against Bridge ID

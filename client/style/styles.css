@@ -1,6 +1,6 @@
 /* STYLING FOR MAIN BODY */
 html {
-  background-image: url('./background.png');
+  background-image: url('../image/background.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -331,7 +331,7 @@ footer span {
 .left-content {
   border: black 3px solid;
   border-radius: 20%;
-  background-image: url('img/trollfile-photo.jpg');
+  background-image: url('../image/img/trollfile-photo.jpg');
   background-size: cover;
   background-position: center;
   height: 100%;
