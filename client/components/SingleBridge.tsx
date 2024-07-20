@@ -12,6 +12,7 @@ export default function SingleBridge() {
   }
 
   const [estimate, setEstimate] = useState(0)
+  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? '' : 'client/'
 
   const {
     data: bridge,
@@ -57,7 +58,7 @@ export default function SingleBridge() {
       <div className="single-bridge-container">
         <div className="single-bridge-left-div">
           <img 
-          src={`../client/image/bridgesimg/${bridge.imageUrl}`} 
+          src={`../${getImageUrlsArray}image/bridgesimg/${bridge.imageUrl}`} 
           alt={bridge.name}
           />
         </div>

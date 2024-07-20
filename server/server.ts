@@ -23,7 +23,7 @@ server.use('/api/v1/auth', authRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
-  server.use('/image', express.static('client/image'))
+  //server.use('/image', express.static('client/image'))
   server.use('/assets', express.static(Path.resolve('./dist/assets')))
   server.get('*', (req, res) => {
     res.sendFile(Path.resolve('./dist/index.html'))

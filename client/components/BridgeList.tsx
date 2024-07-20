@@ -16,6 +16,7 @@ export default function BridgesList() {
   if (!bridges || isLoading) {
     return <p>Fetching bridges from auckland...</p>
   }
+  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? '' : 'client/'
 
   return (
     <>
@@ -29,7 +30,7 @@ export default function BridgesList() {
                   <div>
                     <img
                       className="bridgeimages"
-                      src={`./client/image/bridgesimg/${bridge.imageUrl}`}
+                      src={`${getImageUrlsArray}image/bridgesimg/${bridge.imageUrl}`}
                       alt="bridge"
                     />
                   </div>
