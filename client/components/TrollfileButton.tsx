@@ -7,7 +7,7 @@ export default function TrollfileButton() {
   return (
     <IfAuthenticated>
       <span>
-        <Link to={`/trollfile/${id}`}> Trollfile</Link>
+        <Link to={`/trollfile`}> Trollfile</Link>
       </span>
     </IfAuthenticated>
   )

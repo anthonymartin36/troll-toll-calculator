@@ -24,7 +24,7 @@ export async function useAuthorisedRequest(
           .post(endpoint)
           .set('Authorization', `Bearer ${token}`)
           .send(body)
-        break
+        break 
       case 'patch':
         response = await request
           .patch(endpoint)

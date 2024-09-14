@@ -3,6 +3,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { User } from '../../models/users'
 import { useQuery } from '@tanstack/react-query'
 import { UserApi } from '../api/user'
+import ActiveBridge from './ActiveBridge' 
+import FavBridges from './FavBridges'
 
 export default function Trollfile() {
   const { user: authUser } = useAuth0()
@@ -37,7 +39,7 @@ export default function Trollfile() {
   if (!user || isLoading) {
     return <p>Fetching Trollfile...</p>
   }
-
+  
   return (
     <>
       <h1 id="trollfile-title">My Trollfile</h1>
@@ -61,8 +63,10 @@ export default function Trollfile() {
             </div>
             <div className="gap"></div>
             <div className="right-column">
-              <div className="right-content">ACTIVE BRIDGE</div>
-              <div className="right-content1">FAVORITE BRIDGE</div>
+            <div className="right-content">ACTIVE BRIDGE
+              <ActiveBridge activeBridgeId={user.activeBridgeId}/>
+            </div>
+              <FavBridges userID={user.id}/>
             </div>
           </div>
         </div>

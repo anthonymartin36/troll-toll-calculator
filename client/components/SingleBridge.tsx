@@ -58,7 +58,7 @@ export default function SingleBridge() {
       <div className="single-bridge-container">
         <div className="single-bridge-left-div">
           <img 
-          src={`../${getImageUrlsArray}image/bridgesimg/${bridge.imageUrl}`} 
+          src={`/${getImageUrlsArray}image/bridgesimg/${bridge.imageUrl}`} 
           alt={bridge.name}
           />
         </div>

@@ -11,6 +11,6 @@ export const routes = createRoutesFromElements(
     <Route index element={<Home />} />
     <Route path="bridges" element={<Bridges />} />
     <Route path="bridge/:id" element={<SingleBridge />} />
-    <Route path="trollfile/:id" element={<Trollfile />} />
+    <Route path="trollfile" element={<Trollfile />} />
   </Route>
 )

@@ -324,3 +324,9 @@ npm start
 ## Deployment
 
 Follow the [Dokku Guide](https://github.com/mako-2023/dokku-guide/blob/main/guides/5-Deploying-a-full-stack-application.md) to deploy your site.
+
+## Deployment of Data
+Render.com
+Create a new Database in Render.com then plug in the details into a new server in PGAdmin and create a new instance. 
+Take the external URL created and set them in the environment variable and removing the quotes, then run the Migration and Seed commands.
+Then add the quotes once the Database is established. 
