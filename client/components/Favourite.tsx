@@ -1,32 +1,36 @@
-import { IfAuthenticated } from './IsAuthenticated'
-import { Link } from 'react-router-dom'
+import { IfAuthenticated, IfNotAuthenticated } from './IsAuthenticated'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
-import {useAuth0 } from '@auth0/auth0-react'
+import { getUserIndFavBridgeApi } from '../api/bridge'
 import fav from '../image/img/favourite.png'
 import notFav from '../image/img/notfavourite.png'
 
-
-export default function Favourite() { //prop: bridgeId
+export default function Favourite(bridgeId: number , userId: number) { //prop: bridgeId
     const [img, setImg] = useState(notFav)
-    const toggleInfoWindow = () => {
-        if(img === notFav){
-            setImg(fav)
-        } else
-        setImg(notFav)
+    const toggleInfoWindow = () => img === notFav ? setImg(fav) : setImg(notFav)
+    // get user id
+
+    // if customer is logged in and display the favourite img for thei favourite bridges
+    let favBridge
+    if (bridgeId !== null && userId !== null) {
+      const {
+          data: favbridges,
+          error,
+          isLoading,
+      } = useQuery({
+          queryKey: ['favbridges'], 
+          queryFn: () => getUserIndFavBridgeApi(bridgeId, userId) 
+      })
+      if (error) {
+        return <p>Your bridges are gone! What a massive error</p>
+      }
+      if (!favbridges || isLoading) {
+       return <p>Fetching bridges from auckland...</p>
+      }
+      favBridge = favbridges
     }
-
-    // to fo that call the current api (getallfavBridiges) - and compare against Bridge ID
-    // display favourite bridge if on said list
-
-    //if customer is loged in and chooses a bridge a bridge to be a favourite
-    //call the api (addFavBridge) with the bridge ID
-
-    //also if the bridge is already a favourite, the customer can remove it from the list
-    //call the api (removeFavBridge) with the bridge ID
-
-
-    // toggle between two different images
+    //console.log('FaveBridge : ', favBridge)
 
     return (
         <IfAuthenticated>

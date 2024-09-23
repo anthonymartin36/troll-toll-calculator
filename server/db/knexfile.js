@@ -12,7 +12,7 @@ export default {
   // development: {
   //   client: 'pg',
   //   useNullAsDefault: true,
-  //   connection:  'postgresql://user:w6Vt196ilWZ91EJ7M6b823oGXEdSTheR@dpg-cr6htmlds78s73btvbhg-a.singapore-postgres.render.com/trolltollcalculator_y2fr?ssl=true', //process.env.DATABASE_URL,
+  //   connection:  process.env.DATABASE_URL,
   //   migrations: {
   //     directory: "./migrations", 
   //     schemaName: 'public',

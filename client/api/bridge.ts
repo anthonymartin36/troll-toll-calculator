@@ -1,6 +1,6 @@
 import request from 'superagent'
 import { Bridge } from '../../models/bridge.ts'
-import { FavouriteBridge } from '../../models/favourite-bridges.ts'
+import { FavouriteBridge, UserFavouriteBridge } from '../../models/favourite-bridges.ts'
 
 const bridgeURL = '/api/v1/bridges'
 
@@ -41,4 +41,22 @@ export async function getSingleBridgeApi(id: number): Promise<Bridge> {
   }
 }
 
+export async function getUserFavBridgeApi(userId: number): Promise<UserFavouriteBridge[]> {
+  try {
+    const res = await request.get(`${bridgeURL}/fav/${userId}`)
+    return res.body
+  } catch (error) {
+    console.error(`Error fetching bridge with id ${userId}:`, error)
+    throw new Error(`Failed to fetch bridge with id ${userId}`)
+  }
+}
 
+export async function getUserIndFavBridgeApi(bridgeId: number, userid: number): Promise<UserFavouriteBridge> {
+  try {
+    const res = await request.get(`${bridgeURL}/fav/${bridgeId}/${userid}`)
+    return res.body
+  } catch (error) {
+    console.error(`Error fetching bridge with id ${bridgeId}:`, error)
+    throw new Error(`Failed to fetch bridge with id ${bridgeId}`)
+  }
+}

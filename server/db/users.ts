@@ -47,24 +47,11 @@ export async function getActiveBridge(userId: number, db = connection) {
     .first()
 }
 
-// page refresh issue error in auth0_id is undefined - pressing trollfile button works
-// function sleep(milliseconds: number) {
-//   var start = new Date().getTime();
-//   for (var i = 0; i < 1e7; i++) {
-//     if ((new Date().getTime() - start) > milliseconds){
-//       break;
-//     }
-//   }
-// }
-    // if (!user) {
-    //   // If not then add to database, then return that new record
-    //   const userId = await db('users').select('id').insert(authUser)
-    //   return {
-    //     id: userId[0],
-    //     email: authUser.email,
-    //     firstName: authUser.first_name,
-    //     lastName: authUser.last_name,
-    //     auth0Id: authUser.auth0_id,
-    //     activeBridgeId: null,
-    //   }
-    // }
+ //get user ID with Auth0_id
+export async function getUserId(auth: string, db = connection): Promise<User> {
+  const user = await db('users')
+    .select('id')
+    .where('auth0_id', auth )
+    .first()
+    return user
+}

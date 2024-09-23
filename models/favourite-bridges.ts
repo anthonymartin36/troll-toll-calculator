@@ -12,3 +12,9 @@ export interface NewFavouriteBridge {
 export interface RemoveFavouriteBridge {
   id: number
 }
+
+export interface UserFavouriteBridge {
+  bridgeId: number
+  imageUrl: string
+  name: string
+}
