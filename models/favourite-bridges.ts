@@ -10,7 +10,8 @@ export interface NewFavouriteBridge {
 }
 
 export interface RemoveFavouriteBridge {
-  id: number
+  userId: number
+  bridgeId: number
 }
 
 export interface UserFavouriteBridge {

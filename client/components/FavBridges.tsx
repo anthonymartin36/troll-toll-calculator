@@ -19,8 +19,8 @@ export default function FavBridges({ userID }: { userID: number }) {
         return <p>Fetching bridges from auckland...</p>
       }
     
-    console.log('user id : ', userID)
-    console.log('favbridges : ', favbridges)
+    // console.log('user id : ', userID)
+    // console.log('favbridges : ', favbridges)
     const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : '' 
 
     if(favbridges == null) {
