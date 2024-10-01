@@ -63,10 +63,8 @@ export default function Trollfile() {
             </div>
             <div className="gap"></div>
             <div className="right-column">
-            <div className="right-content">ACTIVE BRIDGE
               <ActiveBridge activeBridgeId={user.activeBridgeId}/>
-            </div>
-              <FavBridges userID={user.id}/>
+              <FavBridges userId={user.id}/>
             </div>
           </div>
         </div>

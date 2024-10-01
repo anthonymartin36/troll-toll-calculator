@@ -128,7 +128,6 @@ main {
 }
 
 /* STYLING FOR THE HEADER AND FOOTER */
-
 header {
   opacity: 70%;
   margin: 0;
@@ -139,13 +138,6 @@ header {
   margin-top: 20px;
 }
 
-/* header h1 {
-  margin: 0;
-  padding: 0.5em 15vw;
-  width: fit-content;
-  background: yellow;
-  border: solid grey 1px;
-} */
 
 header nav {
   display: flex;
@@ -240,6 +232,7 @@ footer span {
 
 #bridgeList .linkButton {
   display: flex;
+  float: left;
   background-color: #ecee98;
   place-self: center;
   align-self: center;
@@ -266,7 +259,7 @@ footer span {
   width: 30px;
   height: 30px;
   margin-top: 30px;
-  margin-right: 40px;
+  margin-right: 10px;
   background-color: transparent;
   border: none;
   outline: none;
@@ -274,6 +267,21 @@ footer span {
 }
 
 .favourites img {
+  width: 40px;
+}
+
+.active {
+  width: 30px;
+  height: 30px;
+  margin-top: 30px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.active img {
   width: 40px;
 }
 
@@ -306,8 +314,15 @@ footer span {
 .right-content1 {
   height: 35vh;
   box-sizing: border-box;
+  text-align:left;
+  position: relative;
 }
 
+.boxImage {
+  width: auto;
+  height:auto;
+  text-align: right;
+}
 .left-column {
   width: 25%;
 }
@@ -323,7 +338,6 @@ footer span {
 .left-content,
 .left-content1 {
   background-color: #98fb98; /* Pale Green */
-  text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -344,11 +358,11 @@ footer span {
 
 .right-content,
 .right-content1 {
+  height: 350px;
   background-color: #ffa07a; /* Light Salmon */
-  text-align: center;
   border: black 3px solid;
   border-radius: 3%;
-  margin-top: 5px;
+  margin-top: 25px;
   margin-bottom: 5px;
 }
 
@@ -356,4 +370,39 @@ footer span {
   0% { opacity: 1; }
   50% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+.right-content h3 {
+  width: 100%;
+  text-align: center;
+}
+
+.right-content1 h3 {
+  width: 100%;
+  text-align: center;
+}
+
+
+.favbridgeimages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.favbridgeimage1 {
+  background-color: powderblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 150px;
+  height: 175px;
+  padding: 10px;
+}
+
+.activebridge2{
+  margin: 20px;
 }

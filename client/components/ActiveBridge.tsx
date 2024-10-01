@@ -8,12 +8,25 @@ export default function ActiveBridge({ activeBridgeId }: { activeBridgeId: numbe
     //console.log('User : ', activeBridgeId)
 
     if(activeBridgeId == null) {
-        return (<> <p> <Link to={`/bridges`}>Get a Bridge </Link> </p> </>)
+        return (<> 
+        <div className="right-content">
+        <div className="activebridge"><h3>ACTIVE BRIDGE</h3></div>
+        <div className="activebridge2">
+        <p> No active Bridge</p>
+        <Link to={`/bridges`}>Get a Bridge </Link> 
+        </div>
+        </div>
+        </>)
     }
 
     return ( 
         <>
-        <div>Hello </div>
+        <div className="right-content">
+        <h3>ACTIVE BRIDGE</h3>
+        <div className="favbridgeimage">
+            <Link to={`/bridges`}>Get a Bridge </Link> 
+        </div>
+        </div>
         </>
     )
 }

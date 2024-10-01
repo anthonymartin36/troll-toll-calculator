@@ -34,22 +34,22 @@ export default function SingleBridge() {
     return <p>Fetching bridges from auckland...</p>
   }
 
-  async function EstimateTollChange() {
-    //console.log('making req')
+  // async function EstimateTollChange() {
+  //   //console.log('making req')
 
-    request
-      .get(`/api/v1/maps/${id}`)
-      .then((result) => {
-        //console.log(result)
+  //   request
+  //     .get(`/api/v1/maps/${id}`)
+  //     .then((result) => {
+  //       //console.log(result)
 
-        setEstimate(result.body.estimate)
-      })
-      .catch((err) => {
-        throw err
-      })
-  }
+  //       setEstimate(result.body.estimate)
+  //     })
+  //     .catch((err) => {
+  //       throw err
+  //     })
+  // }
 
-  EstimateTollChange()
+  // EstimateTollChange()
 
   return (
     <>

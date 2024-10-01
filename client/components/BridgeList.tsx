@@ -4,6 +4,7 @@ import { getuserIdApi } from '../api/user'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import Favourite from './Favourite' 
+import Active from './Active'
 
 export default function BridgesList() { 
   const { user: authUser } = useAuth0()   
@@ -58,6 +59,7 @@ export default function BridgesList() {
                     <Link to={`/bridge/${bridge.id}`}>{bridge.name}</Link>
                   </button>
                   <Favourite  userId={bridgeData.userId} bridgeId={bridge.id}/>
+                  <Active userId={bridgeData.userId} bridgeId={bridge.id} />
                 </div>
               </li>
             )

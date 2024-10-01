@@ -26,20 +26,18 @@ export async function getUser(
 }
 
 export async function getActiveBridge(userId: number, db = connection) {
-  //get user with ID
-  //use userId to join to fav bridge
-
+  //get user with ID   //use userId to join to fav bridge
   return db('bridges')
     .select(
       'bridges.id as id',
-      ' name',
-      ' location',
-      ' type',
-      '  year_built as yearBuilt',
-      ' length_meters as lengthMeters',
-      ' lanes',
-      ' added_by_user as addByUser',
-      ' toll_charge as tollCharge',
+      'name',
+      'location',
+      'type',
+      'year_built as yearBuilt',
+      'length_meters as lengthMeters',
+      'lanes',
+      'added_by_user as addByUser',
+      'toll_charge as tollCharge',
       'image_url as imageUrl'
     )
     .join('users', 'users.active_bridge_id', 'bridges.id')
@@ -55,3 +53,42 @@ export async function getUserId(auth: string, db = connection): Promise<User> {
     .first()
     return user
 }
+
+// remove active bridge from user
+// export async function addActiveBridge(
+//   userId: number, 
+//   bridgeId:number ) { // , db = connection
+//   try {
+//     const id = await connection('users')
+//     .where('id', userId)
+//     .insert({
+//       'active_bridge_id': bridgeId})
+//     .returning('active_bridge_id')
+
+//   } catch (error: unknown) {
+//     if(error instanceof Error) {
+//       console.log(error.message)
+//       throw new Error( error.message )
+//     }
+//     throw error
+//   }
+// }
+
+// add active bridge from user
+export async function updateActiveBridge(
+  userId: number,
+  bridgeId: number,
+  db = connection ) {
+  try {
+    return db('users')
+    .where('id', userId)
+    .update({'active_bridge_id': bridgeId})
+  } catch (error: unknown) {
+    if(error instanceof Error) {
+      console.log(error.message)
+      throw new Error( error.message )
+    }
+    throw error
+  }
+}
+

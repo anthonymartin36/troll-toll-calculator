@@ -9,7 +9,7 @@ export async function getFavBridgesDb(
 ): Promise<FavouriteBridge[]> {
   try {
     //console.log("Getting Favourite bridges- getFavBridgesDb")
-    return db('favourite-bridges').select(
+    return await db('favourite-bridges').select(
       'id',
       'user_id as userId',
       'bridge_id as bridgeId'
@@ -24,11 +24,11 @@ export async function getFavBridgesDb(
 
 export async function getUserFavBridgesDb(
   userId: Number,
-  db = connection
+  db: Knex = connection
 ): Promise<UserFavouriteBridge[]> {
+  // console.log( 'getUserFavBridgesDb user_id : ', userId)
   try {
-    //console.log("Getting Favourite bridges- getUserFavBridgesDb")
-    return db('favourite-bridges')
+    return await db('favourite-bridges')
     .select(
       'bridge_id as bridgeId',
       'image_url as imageUrl',
@@ -38,7 +38,7 @@ export async function getUserFavBridgesDb(
       'bridges.id',
       'favourite-bridges.bridge_id'
     )
-    .where( 'user_id', userId)
+    .where({'user_id': userId })
   } catch (error: unknown) {
     if (error instanceof Error)  {
       throw new Error(error.message)
