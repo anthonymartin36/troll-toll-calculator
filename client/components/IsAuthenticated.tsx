@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react'
 
 export function useIsAuthenticated() {
-  const { isAuthenticated } = useAuth0()
-
+  const { user, isAuthenticated } = useAuth0()
+  //console.log("user : ", user)
   return isAuthenticated
 }
 

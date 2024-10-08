@@ -1,4 +1,5 @@
 import { getBridgesApi } from '../api/bridge.ts'
+import { IfAuthenticated } from './IsAuthenticated'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getuserIdApi } from '../api/user'
 import { useQuery } from '@tanstack/react-query'
@@ -26,18 +27,18 @@ export default function BridgesList() {
   if (!bridges || bridgeisLoading) {
     return <p>Fetching bridges from auckland...</p>
   }
-
+  
+  const bridgeData = { "bridgeId": 1} //"userId": user.id, 
+  // bridgeId is a place holder here until it is populated
+  
   const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : '' 
-  //console.log("Auth : ", auth)
   if(isError){
     return <p>Your Users are gone! What a massive error</p>
   }
   if (!user) {
-    return <p>Fetching users...</p>
+    return <p>Your users are non existant! What a massive error</p>
   }
-  const bridgeData = { "userId": Number(user.id), "bridgeId": 1}
-  
-  
+
   return (
     <>
       <div>
@@ -55,11 +56,14 @@ export default function BridgesList() {
                       alt="bridge"
                     />
                   </div>
+                  <IfAuthenticated>
+                    <Favourite  userId={user.id} bridgeId={bridge.id}/>
+                    <Active userId={user.id} bridgeId={bridge.id} />
+                  </IfAuthenticated>
                   <button className="linkButton">
                     <Link to={`/bridge/${bridge.id}`}>{bridge.name}</Link>
                   </button>
-                  <Favourite  userId={bridgeData.userId} bridgeId={bridge.id}/>
-                  <Active userId={bridgeData.userId} bridgeId={bridge.id} />
+
                 </div>
               </li>
             )

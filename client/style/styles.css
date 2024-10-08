@@ -111,7 +111,7 @@ main {
   text-decoration: none;
   border-radius: 5px;
   border: #000000 solid 3px;
-  width: 100px;
+  width: 150px;
   height: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   margin-top: 5%;
@@ -156,6 +156,18 @@ header nav span {
 }
 
 header nav span a {
+  background-color: #c9cc39;
+  border: black 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: black;
+  padding: 0.5em 1em;
+}
+
+button {
   background-color: #c9cc39;
   border: black 2px solid;
   border-radius: 20px;
@@ -259,11 +271,10 @@ footer span {
   width: 30px;
   height: 30px;
   margin-top: 30px;
-  margin-right: 10px;
+  margin-right: 5px;
   background-color: transparent;
   border: none;
   outline: none;
-  cursor: pointer;
 }
 
 .favourites img {
@@ -314,7 +325,7 @@ footer span {
 .right-content1 {
   height: 35vh;
   box-sizing: border-box;
-  text-align:left;
+  text-align: center;
   position: relative;
 }
 

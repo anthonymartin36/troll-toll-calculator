@@ -34,23 +34,6 @@ export default function SingleBridge() {
     return <p>Fetching bridges from auckland...</p>
   }
 
-  // async function EstimateTollChange() {
-  //   //console.log('making req')
-
-  //   request
-  //     .get(`/api/v1/maps/${id}`)
-  //     .then((result) => {
-  //       //console.log(result)
-
-  //       setEstimate(result.body.estimate)
-  //     })
-  //     .catch((err) => {
-  //       throw err
-  //     })
-  // }
-
-  // EstimateTollChange()
-
   return (
     <>
       <h1 id="single-bridge-title">{bridge.name}</h1>
@@ -98,7 +81,7 @@ export default function SingleBridge() {
       </div>
       <div className="backButton">
         <button>
-          <Link to="/bridges">Back</Link>
+          <Link to="/bridges">Bridge List</Link>
         </button>
       </div>
     </>

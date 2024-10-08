@@ -12,19 +12,19 @@ export function SignOut() {
     event.preventDefault()
     logout()
 
-    console.log('Log out')
+    //console.log('Log out')
   }
 
   async function OnGetRequest() {
     const response = await (await makeRequest)()
-    console.log(response)
+    //console.log(response)
   }
 
   return (
     <IfAuthenticated>
-      <span>
-        <a onClick={OnSignOut}>Sign Out</a>
-      </span>
+
+        <button onClick={OnSignOut}>Sign Out</button>
+
     </IfAuthenticated>
   )
 }

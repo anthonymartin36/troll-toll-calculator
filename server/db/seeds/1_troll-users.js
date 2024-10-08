@@ -1,5 +1,5 @@
 export async function seed(knex) {
-  await knex('users').insert([
+  await knex('troll-users').insert([
     {
       email: 'grendel@trolllifestyle.co.uk',
       first_name: 'Grendel',
@@ -21,5 +21,12 @@ export async function seed(knex) {
       auth0_id: '3',
       active_bridge_id: 1,
     },
+    {
+      email: 'anthony.martin36@gmail.com', 
+      first_name: 'Anthony',
+      last_name: 'Martin',
+      auth0_id: 'google-oauth2|112179895623274375476',
+      active_bridge_id: 4,
+    }
   ])
 }

@@ -11,7 +11,7 @@ export async function getUser(
   if (!authUser.auth0_id){
     throw new Error('auth0_id is undefined')
   }
-  const user = await db('users')
+  const user = await db('troll-users')
     .select('id', 
       'active_bridge_id as activeBridgeId', 
       'first_name as firstName', 
@@ -40,18 +40,36 @@ export async function getActiveBridge(userId: number, db = connection) {
       'toll_charge as tollCharge',
       'image_url as imageUrl'
     )
-    .join('users', 'users.active_bridge_id', 'bridges.id')
-    .where('users.id', userId)
+    .join('troll-users', 'troll-users.active_bridge_id', 'bridges.id')
+    .where('troll-users.id', userId)
     .first()
 }
 
  //get user ID with Auth0_id
 export async function getUserId(auth: string, db = connection): Promise<User> {
-  const user = await db('users')
+  const user = await db('troll-users')
     .select('id')
     .where('auth0_id', auth )
     .first()
     return user
+}
+
+// add active bridge from user
+export async function updateActiveBridge(
+  userId: number,
+  bridgeId: number,
+  db = connection ) {
+  try {
+    return db('troll-users')
+    .where('id', userId)
+    .update({'active_bridge_id': bridgeId})
+  } catch (error: unknown) {
+    if(error instanceof Error) {
+      console.log(error.message)
+      throw new Error( error.message )
+    }
+    throw error
+  }
 }
 
 // remove active bridge from user
@@ -73,22 +91,3 @@ export async function getUserId(auth: string, db = connection): Promise<User> {
 //     throw error
 //   }
 // }
-
-// add active bridge from user
-export async function updateActiveBridge(
-  userId: number,
-  bridgeId: number,
-  db = connection ) {
-  try {
-    return db('users')
-    .where('id', userId)
-    .update({'active_bridge_id': bridgeId})
-  } catch (error: unknown) {
-    if(error instanceof Error) {
-      console.log(error.message)
-      throw new Error( error.message )
-    }
-    throw error
-  }
-}
-

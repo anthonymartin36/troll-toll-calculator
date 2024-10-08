@@ -29,7 +29,7 @@ export default function Favourite(bridgeData: NewFavouriteBridge) {
     return ( 
         <IfAuthenticated>
           <div>
-            <button className="favourites"  onChange={close} > 
+            <button className="favourites" > 
             <img 
                 onClick={toggleInfoWindow}
                 src={img}
