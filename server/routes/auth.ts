@@ -19,7 +19,6 @@ router.get('/:id/active', async (req, res) => {
 })
 
 // check active bridge route
-
 router.get('/active/:userId', async (req, res) => {
   try {
     const userId = Number(req.params.userId)
@@ -31,7 +30,6 @@ router.get('/active/:userId', async (req, res) => {
     res.status(500).send('Something went wrong - getActiveBridge')
   }
 })
-
 
 // Update active bridge route
 router.put('/active/:userId/:bridgeId', async (req, res) => {
@@ -65,8 +63,6 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
     res.status(500).send('Something went wrong')
   }
 })
-
-
 
 //Get User ID via Auth0_id
 router.get('/:auth', async (req, res) => {

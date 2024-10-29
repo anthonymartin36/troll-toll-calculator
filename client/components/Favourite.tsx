@@ -1,33 +1,34 @@
-import { IfAuthenticated } from './IsAuthenticated'
 import { useState, useEffect } from 'react'
-import { NewFavouriteBridge } from '../../models/favourite-bridges.ts'
 import { checkFavBridgesApi, addFavBridgeApi, removeFavBridgeApi } from '../api/bridge'
 import fav from '../image/img/favourite.png'
 import notFav from '../image/img/notfavourite.png'
+import { useAuthContext } from './Context'
 
-export default function Favourite(bridgeData: NewFavouriteBridge) { 
+
+export default function Favourite({bridgeId}: any) { 
+    const { userId } = useAuthContext() 
+    const favourite = { userId: userId, bridgeId: bridgeId }
     const [img, setImg] = useState(notFav)
     useEffect(() => {
       const fetchData = async () => {
-        const result =  await checkFavBridgesApi(bridgeData.userId, bridgeData.bridgeId) 
-        if(bridgeData.bridgeId == result?.bridgeId)  { 
-          setImg(fav)
-        } 
+        const result = await checkFavBridgesApi(bridgeId, userId) 
+        result?.bridgeId ? setImg(fav) : setImg(notFav)
       }
       fetchData()
-    }, [bridgeData.bridgeId])
+    }, [])
+
     const toggleInfoWindow = async () => {
       if (img == notFav) {
-        await addFavBridgeApi(bridgeData)
+        //console.log("addFavBridgeApi bridge : ", favourite.bridgeId.bridgeId)
+        await addFavBridgeApi(favourite)
         setImg(fav)
       } else {
-        await removeFavBridgeApi(bridgeData)
+        await removeFavBridgeApi(favourite)
         setImg(notFav)
       }
     }
 
     return ( 
-        <IfAuthenticated>
           <div>
             <button className="favourites" > 
             <img 
@@ -36,7 +37,6 @@ export default function Favourite(bridgeData: NewFavouriteBridge) {
                 alt="favourite" />
             </button>
             </div>
-        </IfAuthenticated>
     )
 }
 

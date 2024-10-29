@@ -74,6 +74,7 @@ export async function getUserIndFavBridgeApi(bridgeId: number, userid: number): 
 
 export async function checkFavBridgesApi(bridgeId: number, userId: number){
   try {
+    //console.log("Client API checkFavBridgesApi bridgeId : ", bridgeId, " userId : ", userId)
     const res = await request.get(`${bridgeURL}/${bridgeId}/${userId}`)
     return res.body
   } catch (error) {

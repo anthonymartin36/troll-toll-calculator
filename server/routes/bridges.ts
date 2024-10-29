@@ -3,7 +3,7 @@ import * as dbBridge from '../db/bridges.ts'
 import * as dbFavBridge from '../db/favourite-bridges.ts'
 
 const router = express.Router()
-// -- MVP -- //
+// GET /api/v1/bridges
 router.get('/', async (req, res) => {
   try {
     const bridges = await dbBridge.getAllBridgesDb()
@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
 router.get('/fav/:userId', async (req, res) => {
   try {
      const userId = Number(req.params.userId)
-     //console.log("route getUserFavBridgesDb userId : ", userId)
      const favBridges = await dbFavBridge.getUserFavBridgesDb(userId)
      res.json(favBridges)
    } catch (error) {

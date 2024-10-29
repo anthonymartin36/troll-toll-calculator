@@ -1,4 +1,5 @@
 import { useAuthorisedRequest } from '../useAuthorisedRequest'
+import { createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { User } from '../../models/users'
 import { useQuery } from '@tanstack/react-query'
@@ -6,9 +7,11 @@ import { UserApi } from '../api/user'
 import ActiveBridge from './ActiveBridge' 
 import FavBridges from './FavBridges'
 
+export const Context = createContext(0)
+
 export default function Trollfile() {
   const { user: authUser } = useAuth0()
-
+  //const [loggedIn, setLoggedIn] = useState(0)
   const request = useAuthorisedRequest(
     'post',
     '/api/v1/auth',
@@ -19,7 +22,6 @@ export default function Trollfile() {
       auth0_id: authUser?.sub,
     })
   )
-
   const {
     data: user,
     isError,
@@ -39,11 +41,10 @@ export default function Trollfile() {
   if (!user || isLoading) {
     return <p>Fetching Trollfile...</p>
   }
-  
+  //const thisuser = authUser?.sub
   return (
     <>
       <h1 id="trollfile-title">My Trollfile</h1>
-
       <div className="body-wrapper">
         <div className="main-container">
           <div className="container">
@@ -69,6 +70,7 @@ export default function Trollfile() {
           </div>
         </div>
       </div>
+
     </>
   )
 }

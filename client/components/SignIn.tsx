@@ -9,7 +9,7 @@ export function SignIn() {
     event.preventDefault()
     loginWithRedirect()
   }
-
+  
   return (
     <IfNotAuthenticated>
       <span>

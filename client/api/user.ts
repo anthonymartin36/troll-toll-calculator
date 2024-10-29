@@ -12,7 +12,7 @@ export async function UserApi(request: any): Promise<User> {
   }
 }
 
-export async function getuserIdApi(auth: string): Promise<User> {
+export async function getUserIdApi(auth: string): Promise<User> {
   try {
     const res = await request.get(`${userURL}/${auth}`)
     return res.body

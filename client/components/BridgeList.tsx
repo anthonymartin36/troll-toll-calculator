@@ -1,26 +1,20 @@
 import { getBridgesApi } from '../api/bridge.ts'
 import { IfAuthenticated } from './IsAuthenticated'
-import { useAuth0 } from '@auth0/auth0-react'
-import { getuserIdApi } from '../api/user'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import Favourite from './Favourite' 
 import Active from './Active'
+import AuthProvider from './Context'
 
 export default function BridgesList() { 
-  const { user: authUser } = useAuth0()   
-  const auth = authUser?.sub || ''// Updated to use 'authUser'
-  
+
+  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : '' 
   const {
     data: bridges,
     error : bridgeError,
     isLoading : bridgeisLoading,
   } = useQuery({ queryKey: ['bridges'], queryFn: getBridgesApi })
 
-  const { data: user,
-    isError,
-  } = useQuery({ queryKey: ['user'], queryFn: () => getuserIdApi(auth) })
-  
   if (bridgeError) {
     return <p>Your bridges are gone! What a massive error</p>
   }
@@ -28,16 +22,7 @@ export default function BridgesList() {
     return <p>Fetching bridges from auckland...</p>
   }
   
-  const bridgeData = { "bridgeId": 1} //"userId": user.id, 
-  // bridgeId is a place holder here until it is populated
-  
-  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : '' 
-  if(isError){
-    return <p>Your Users are gone! What a massive error</p>
-  }
-  if (!user) {
-    return <p>Your users are non existant! What a massive error</p>
-  }
+  const bridgeData = { "bridgeId": 1} 
 
   return (
     <>
@@ -57,8 +42,10 @@ export default function BridgesList() {
                     />
                   </div>
                   <IfAuthenticated>
-                    <Favourite  userId={user.id} bridgeId={bridge.id}/>
-                    <Active userId={user.id} bridgeId={bridge.id} />
+                    <AuthProvider>
+                      <Favourite bridgeId={bridge.id} />
+                      <Active bridgeId={bridge.id} />
+                    </AuthProvider>
                   </IfAuthenticated>
                   <button className="linkButton">
                     <Link to={`/bridge/${bridge.id}`}>{bridge.name}</Link>

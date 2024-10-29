@@ -48,12 +48,11 @@ export async function getUserFavBridgesDb(
 }
 
 export async function checkFavBridgesDb(
-  userId: Number,
   bridgeId: Number,
+  userId: Number,
   db: Knex = connection
 ): Promise<Number[]> {
   try {
-    //console.log("Checking Favourite bridges - checkFavBridgesDb")
     return await db('favourite-bridges').select('bridge_id as bridgeId')
     .where( {'bridge_id': bridgeId,
             'user_id': userId })
