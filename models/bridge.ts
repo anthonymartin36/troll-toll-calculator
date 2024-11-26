@@ -13,3 +13,17 @@ export interface Bridge {
   origin: string | null
   destination: string | null
 }
+
+export interface ActiveBridge {
+  id: number
+  name: string
+  location: string
+  type: string
+  yearBuilt: number
+  lengthMeters: string
+  lanes?: number | null
+  addedByUser: string
+  tollCharge: number
+  imageUrl: string
+}
+

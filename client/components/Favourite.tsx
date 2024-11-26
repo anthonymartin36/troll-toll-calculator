@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { checkFavBridgesApi, addFavBridgeApi, removeFavBridgeApi } from '../api/bridge'
+
 import fav from '../image/img/favourite.png'
 import notFav from '../image/img/notfavourite.png'
-import { useAuthContext } from './Context'
+import { useAuthContext } from './Context'  
 
 
-export default function Favourite({bridgeId}: any) { 
+export default function Favourite({bridgeId}: {bridgeId: number})  { 
     const { userId } = useAuthContext() 
     const favourite = { userId: userId, bridgeId: bridgeId }
     const [img, setImg] = useState(notFav)

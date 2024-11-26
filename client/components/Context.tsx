@@ -57,23 +57,3 @@ function getCurrentUserId(){
   return result
 }
 
-// const { data: user, isError, isLoading, error } = useQuery({
-  //   queryKey: ['user', sub],
-  //   queryFn: () => getuserIdApi(sub),
-  //   onError: (err) => console.error("Error fetching user data:", err),
-  // })
-
-  // if (isLoading) {
-  //   console.log("Fetching userId ...")
-  //   return <div>Loading...</div> // You can replace this with a loading spinner or any other loading indicator
-  // }
-
-  // if (isError) {
-  //   console.error("Your userId cannot be found! What a massive error", error)
-  //   return <div>Error loading user data</div> // You can replace this with an error message or component
-  // }
-
-  // if (!user) {
-  //   console.error("User data is undefined")
-  //   return null;
-  // }

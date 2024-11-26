@@ -1,53 +1,71 @@
-import { IfAuthenticated } from './IsAuthenticated'
 import { useState, useEffect } from 'react'
-//import { NewFavouriteBridge } from '../../models/favourite-bridges.ts'
 import { checkActiveBridgeApi, putActiveBridgeApi } from '../api/user'
 import { useAuthContext } from './Context'
+import { useQuery } from '@tanstack/react-query'
+import { ActiveBridge } from '../../models/bridge'
 import active from '../image/img/TrollHomeNow.png'
 import notActive from '../image/img/TrollHome.png'
 
-export default function Active(bridgeId: any) { 
+export default function Active({bridgeId} : {bridgeId: number}) { 
   const { userId } = useAuthContext()  
-  const [activeBridgeId, setActiveBridgeId] = useState<number | null>(null)
-    const [img, setImg] = useState(notActive)
-    useEffect(() => {
-      const fetchData = async () => {
-        const result =  await checkActiveBridgeApi(userId) 
-        if(bridgeId === result?.id)  { 
-          setActiveBridgeId(result?.id)
-          setImg(active)
-        } 
-      }
-      fetchData()
-    }, [bridgeId])
- 
-    const toggleInfoWindow = async () => { 
-      // setImg(notActive)
-      const image = document.getElementById(`img${activeBridgeId}`) as HTMLImageElement
-      //console.log('image : ', image ) //' active : ', active ) 
-      if (image){          
-        document.body.appendChild(image).src = `${notActive}`
-        document.getElementById(`img${activeBridgeId}`)
-      }
-      if (bridgeId !== activeBridgeId) {
-        console.log('bridgeId : ', bridgeId)
-        await putActiveBridgeApi(userId, bridgeId)
-        setActiveBridgeId(bridgeId)
-        setImg(active)
-      } 
+  const [img, setImg] = useState(notActive)
+
+  const {
+    data: activeBridgeData,
+    isError,
+    isLoading,
+  } : {
+    data: ActiveBridge | undefined 
+    isError: boolean
+    isLoading: boolean
+  } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: async () => {
+      return await checkActiveBridgeApi(userId)
     }
-    
-    return ( 
-        <IfAuthenticated>
-          <div>
-            <button className="active" > 
-            <img 
-                id={`img${bridgeId}`}
-                onClick={toggleInfoWindow}
-                src={`${img}`}
-                alt="active" />
-            </button>
-            </div>
-        </IfAuthenticated>
-    )
+  })
+
+  useEffect(() => {
+    if (activeBridgeData && bridgeId === activeBridgeData.id) {
+      setImg(active)
+    } 
+  }, [activeBridgeData, bridgeId])
+
+  if (activeBridgeData === undefined) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <p>Your Trollfile cannot be found! What a massive error</p>
+  }
+  if (!activeBridgeData || isLoading) {
+    return <p>Fetching Trollfile...</p>
+  }
+
+  const toggleInfoWindow = async () => {   
+
+    let image = document.getElementById(`img${activeBridgeData?.id }`) as HTMLImageElement
+    if(image !== null && activeBridgeData.id !== bridgeId) {
+      image.src = notActive 
+      console.log("Image !== null, image : ", image, " activeBridge : ",  activeBridgeData.id)
+    }   
+    if (bridgeId !== activeBridgeData.id) {
+      console.log("bridgeId !== activeBridge - BridgeId : ", bridgeId, " activeBridge : ",  activeBridgeData.id)
+      await putActiveBridgeApi(userId, bridgeId)
+      //setActiveBridge(bridgeId)
+      setImg(active)
+    }
+    console.log('END bridgeId : ', bridgeId, 'activeBridge : ', activeBridgeData.id) 
+  }
+
+  return ( 
+    <div id={`${bridgeId}`}>
+      <button className="active" > 
+        <img 
+          id={`img${bridgeId}`}
+          onClick={toggleInfoWindow}
+          src={`${img}`}
+          alt="active" />
+      </button>
+    </div>
+  )
 }
