@@ -46,12 +46,10 @@ export default function Active({bridgeId} : {bridgeId: number}) {
     let image = document.getElementById(`img${activeBridgeData?.id }`) as HTMLImageElement
     if(image !== null && activeBridgeData.id !== bridgeId) {
       image.src = notActive 
-      console.log("Image !== null, image : ", image, " activeBridge : ",  activeBridgeData.id)
+      console.log(" activeBridge : ",  activeBridgeData.id)
     }   
     if (bridgeId !== activeBridgeData.id) {
-      console.log("bridgeId !== activeBridge - BridgeId : ", bridgeId, " activeBridge : ",  activeBridgeData.id)
       await putActiveBridgeApi(userId, bridgeId)
-      //setActiveBridge(bridgeId)
       setImg(active)
     }
     console.log('END bridgeId : ', bridgeId, 'activeBridge : ', activeBridgeData.id) 
