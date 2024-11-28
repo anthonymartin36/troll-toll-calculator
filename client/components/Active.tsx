@@ -6,8 +6,6 @@ import { ActiveBridge } from '../../models/bridge'
 import active from '../image/img/TrollHomeNow.png'
 import notActive from '../image/img/TrollHome.png'
 
-//https://react.dev/learn/sharing-state-between-components !!!!!
-
 
 export default function Active({bridgeId} : {bridgeId: number}) { 
   const { userId } = useAuthContext()  
@@ -48,36 +46,29 @@ export default function Active({bridgeId} : {bridgeId: number}) {
 
   const toggleInfoWindow = async () => {   
     let oldActiveBridge = await checkActiveBridgeApi(userId)
-
-    let image = document.getElementById(`img${oldActiveBridge.id }`) as HTMLImageElement
-
-    // get pervious active bridge
-    // if (activeBridgeData?.id != oldActiveBridge.id) {
-    //   console.log("Old oldActiveBridge is the same : ", oldActiveBridge)
-    // }
-    
-    // // check if the bridge is the same
-    // if(image !== null && oldActiveBridge.id !== bridgeId) {
-    //   //setImg(notActive)
-    //   image.src = notActive     // get the old image
-    //   console.log(" activeBridge : ",  oldActiveBridge.id)
-    // }   
-      if (bridgeId !== oldActiveBridge.id) {
+    if (bridgeId !== oldActiveBridge.id) {
         await putActiveBridgeApi(userId, bridgeId)
         setImg(active)
     }
     console.log('END bridgeId : ', bridgeId, 'activeBridge : ', activeBridgeData.id) 
   }
 
-  return ( 
+  return (
     <div id={`${bridgeId}`}>
-      <button className="active" > 
-        <img 
-          id={`img${bridgeId}`}
-          onClick={toggleInfoWindow}
-          src={`${img}`}
-          alt="active" />
+      <button className="active">
+        <Image bridgeId={bridgeId} toggleInfoWindow={toggleInfoWindow} img={img} />
       </button>
     </div>
+  )
+}
+
+const Image = ({ bridgeId, toggleInfoWindow, img }: { bridgeId: number; toggleInfoWindow: () => Promise<void>; img: string }) => {
+  return (
+    <img
+      id={`img${bridgeId}`}
+      onClick={toggleInfoWindow}
+      src={`${img}`}
+      alt="active"
+    />
   )
 }
