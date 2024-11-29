@@ -49,7 +49,7 @@ export default function Active({bridgeId} : {bridgeId: number}) {
         await putActiveBridgeApi(userId, bridgeId)
         setImg(true)
     }
-    console.log('END bridgeId : ', bridgeId, 'activeBridge : ', activeBridgeData.id) 
+    //console.log('END bridgeId : ', bridgeId, 'activeBridge : ', activeBridgeData.id) 
   }
 
   return (
