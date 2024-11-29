@@ -30,7 +30,7 @@ export default function Favourite({bridgeId}: {bridgeId: number})  {
     }
 
     return ( 
-          <div>
+          <div id={`${bridgeId}`}>
             <button className="favourites" > 
             <img 
                 onClick={toggleInfoWindow}

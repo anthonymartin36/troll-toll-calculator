@@ -6,10 +6,9 @@ import { ActiveBridge } from '../../models/bridge'
 import active from '../image/img/TrollHomeNow.png'
 import notActive from '../image/img/TrollHome.png'
 
-
 export default function Active({bridgeId} : {bridgeId: number}) { 
   const { userId } = useAuthContext()  
-  const [img, setImg] = useState(notActive)
+  const [img, setImg] = useState(false)
 
   const {
     data: activeBridgeData,
@@ -28,9 +27,9 @@ export default function Active({bridgeId} : {bridgeId: number}) {
 
   useEffect(() => {
     if (activeBridgeData && bridgeId === activeBridgeData.id) {
-      setImg(active)
+      setImg(true)
     } else {
-      setImg(notActive)
+      setImg(false)
     }
   }, [activeBridgeData, bridgeId])
 
@@ -48,27 +47,42 @@ export default function Active({bridgeId} : {bridgeId: number}) {
     let oldActiveBridge = await checkActiveBridgeApi(userId)
     if (bridgeId !== oldActiveBridge.id) {
         await putActiveBridgeApi(userId, bridgeId)
-        setImg(active)
+        setImg(true)
     }
     console.log('END bridgeId : ', bridgeId, 'activeBridge : ', activeBridgeData.id) 
   }
 
   return (
     <div id={`${bridgeId}`}>
-      <button className="active">
-        <Image bridgeId={bridgeId} toggleInfoWindow={toggleInfoWindow} img={img} />
-      </button>
+        <Image bridgeId={bridgeId} onShow={()=>toggleInfoWindow()} img={img} />
     </div>
   )
 }
 
-const Image = ({ bridgeId, toggleInfoWindow, img }: { bridgeId: number; toggleInfoWindow: () => Promise<void>; img: string }) => {
-  return (
-    <img
-      id={`img${bridgeId}`}
-      onClick={toggleInfoWindow}
-      src={`${img}`}
-      alt="active"
-    />
+function Image({ bridgeId, onShow, img }: { 
+  bridgeId: number;
+  onShow: () => Promise<void>; 
+  img: boolean }) : any {
+  const [show, setShow] = useState(false)
+  return ( 
+    <>
+    <button className="active"> 
+      {img === true ? (
+          <img
+            id={`img${bridgeId}`}
+            onClick={onShow}
+            src={`${active}`}
+            alt="active"
+          />
+      ) : (
+        <img
+          id={`img${bridgeId}`}
+          onClick={onShow}
+          src={`${notActive}`}
+          alt="active"
+        />
+      )}
+    </button>
+    </>
   )
 }
