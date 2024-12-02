@@ -8,7 +8,7 @@ import AuthProvider from './Context'
 
 export default function BridgesList() { 
 
-  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : '/' 
+  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/image/bridgesimg' : 'image'
   const {
     data: bridges,
     error : bridgeError,
@@ -37,7 +37,7 @@ export default function BridgesList() {
                   <div>
                     <img
                       className="bridgeimages"
-                      src={`${getImageUrlsArray}image/bridgesimg/${bridge.imageUrl}`}
+                      src={`${getImageUrlsArray}/${bridge.imageUrl}`}
                       alt="bridge"
                     />
                   </div>
