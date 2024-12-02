@@ -9,10 +9,9 @@ import FavBridges from './FavBridges'
 
 export const Context = createContext(0)
 
-export default function Trollfile() {
+async function getUserData(){
   const { user: authUser } = useAuth0()
-  //const [loggedIn, setLoggedIn] = useState(0)
-  const request = useAuthorisedRequest(
+  const request = await useAuthorisedRequest(
     'post',
     '/api/v1/auth',
     JSON.stringify({
@@ -22,6 +21,14 @@ export default function Trollfile() {
       auth0_id: authUser?.sub,
     })
   )
+  return request  
+  console.log("useAuthorisedRequest : ", authUser?.email)
+}
+
+export default function Trollfile() {
+  //const [loggedIn, setLoggedIn] = useState(0)
+  const { user: authUser } = useAuth0()
+  const request = getUserData() 
   const {
     data: user,
     isError,
