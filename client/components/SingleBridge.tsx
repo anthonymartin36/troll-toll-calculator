@@ -12,7 +12,7 @@ export default function SingleBridge() {
   }
 
   const [estimate, setEstimate] = useState(0)
-  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : ''
+  const getImageUrlsArray = import.meta.env.VITE_NODE_ENV === 'development'? 'client/' : '/'
 
   const {
     data: bridge,
