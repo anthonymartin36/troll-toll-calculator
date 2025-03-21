@@ -6,7 +6,7 @@ export async function getUser(
   db = connection
 ): Promise<User> {
   // Get user if existing
-  
+  //console.log("authUser : ", authUser.auth0_id)
   //sleep(10000) awaiting auth0_id to be defined
   if (!authUser.auth0_id){
     throw new Error('auth0_id is undefined')

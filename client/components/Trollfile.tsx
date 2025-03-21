@@ -1,4 +1,4 @@
-import { useAuthorisedRequest } from '../useAuthorisedRequest'
+import { useUserData } from './Hooks/getUserData'
 import { createContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { User } from '../../models/users'
@@ -9,26 +9,11 @@ import FavBridges from './FavBridges'
 
 export const Context = createContext(0)
 
-async function getUserData(){
-  const { user: authUser } = useAuth0()
-  const request = await useAuthorisedRequest(
-    'post',
-    '/api/v1/auth',
-    JSON.stringify({
-      email: authUser?.email,
-      first_name: authUser?.given_name || authUser?.nickname,
-      last_name: authUser?.family_name || authUser?.nickname,
-      auth0_id: authUser?.sub,
-    })
-  )
-  return request  
-  console.log("useAuthorisedRequest : ", authUser?.email)
-}
-
 export default function Trollfile() {
-  //const [loggedIn, setLoggedIn] = useState(0)
+
   const { user: authUser } = useAuth0()
-  const request = getUserData() 
+  const getUserData = useUserData()
+  //const request = 
   const {
     data: user,
     isError,
@@ -39,7 +24,7 @@ export default function Trollfile() {
     isLoading: boolean
   } = useQuery({
     queryKey: ['user', authUser?.sub],
-    queryFn: () => UserApi(request),
+    queryFn: async () => UserApi(() => getUserData()),
   })
 
   if (isError) {
@@ -81,3 +66,31 @@ export default function Trollfile() {
     </>
   )
 }
+
+// async function getUserData() {
+//   const { user: authUser, getAccessTokenSilently } = useAuth0()
+
+//   // Return a callable function (authRequest)
+//   // return async () => {
+//   //   try {
+//       const token = await getAccessTokenSilently()
+//       console.log('token : ', token)
+//       return await useAuthorisedRequest(
+//         'post',
+//         'api/v1/auth',
+//         JSON.stringify({
+//           email: authUser?.email,
+//           first_name: authUser?.given_name || authUser?.nickname,
+//           last_name: authUser?.family_name || authUser?.nickname,
+//           auth0_id: authUser?.sub,
+//         }),
+//         {
+//           Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+//         }
+//       )
+//     // } catch (error) {
+//     //   console.error('Error fetching user data:', error)
+//     //   throw error
+//     // }
+//   // }
+// }

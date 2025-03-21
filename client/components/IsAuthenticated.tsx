@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { getuserIdApi } from '../api/user'
+import { getUserIdApi } from '../api/user'
 
 
 export function useIsAuthenticated() {

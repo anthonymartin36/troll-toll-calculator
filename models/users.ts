@@ -5,6 +5,7 @@ export interface User {
   lastName: string
   auth0Id: string
   activeBridgeId: number | null
+  Authorization?: string 
 }
 
 export interface AuthUser {

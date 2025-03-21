@@ -4,17 +4,21 @@ import { NewFavouriteBridge } from '../../models/favourite-bridges'
 
 const userURL = '/api/v1/auth'
 
-export async function UserApi(request: any): Promise<User> {
+export async function UserApi(authRequest: () => Promise<any>): Promise<User> {
   try {
-    return (await (await request)()).body
+    const response = await authRequest()
+    return response.body
   } catch (error) {
-    throw console.error('Error fetching user data.', error)
+    console.error('Error fetching user data.', error)
+    throw error
   }
 }
 
-export async function getUserIdApi(auth: string): Promise<User> {
+export async function getUserIdApi(auth: string, token: string): Promise<User> {
   try {
-    const res = await request.get(`${userURL}/${auth}`)
+    const res = await request
+      .get(`${userURL}/${auth}`)      
+      .set('Authorization', `Bearer ${token}`)
     return res.body
   } catch (error) {
     throw console.error('Error fetching user data.', error)

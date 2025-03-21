@@ -1,14 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import request from 'superagent'
 
-export async function useAuthorisedRequest(
-  method: string,
-  endpoint: string,
-  body: string | undefined
-) {
+export async function useAuthorisedRequest() {
   const { getAccessTokenSilently } = useAuth0()
 
-  return async () => {
+  return async (method: string, endpoint: string, body?: string) => {
     const token = await getAccessTokenSilently()
 
     let response
@@ -42,6 +38,7 @@ export async function useAuthorisedRequest(
           "Unknown Requst method. Should be 'get, post, patch, or delete'"
         )
     }
+    //console.log('response useAuthorisedRequest : ', response)
     return response
   }
 }

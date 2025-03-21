@@ -10,6 +10,7 @@ const router = express.Router()
 router.get('/:id/active', async (req, res) => {
   const userId = Number(req.params.id)
   try {
+    //console.log('req.auth : ', req.auth)
     const activeBridge = await db.getActiveBridge(userId)
     res.json(activeBridge)
   } catch (error) {
@@ -48,8 +49,9 @@ router.put('/active/:userId/:bridgeId', async (req, res) => {
 router.post('/', checkJwt, async (req: JwtRequest, res) => {
   const body = Object.keys(req.body)[0]
   const authUser: AuthUser = JSON.parse(body)
-
-  const auth0Id = req.auth?.sub
+  //console.log('checkJwt : ', checkJwt)
+  const auth0Id = req.auth?.sub // here we get the auth0Id from the request
+  console.log('auth0Id : ', auth0Id)
   if (!auth0Id) {
     console.error('No auth0Id')
     return res.status(401).send('Unauthorized')

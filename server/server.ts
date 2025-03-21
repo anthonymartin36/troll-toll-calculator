@@ -28,7 +28,6 @@ if (process.env.NODE_ENV === 'production') {
   server.get('*', (req, res) => {
     res.sendFile(Path.resolve('./dist/index.html'))
   })
-
 }
 
 export default server
